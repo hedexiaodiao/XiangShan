@@ -28,17 +28,17 @@ import xiangshan.mem.{SqPtr, StoreDataBundle}
 import scala.math.max
 
 class RSParams {
-  var numEntries: Int = 0
-  var numEnq: Int = 0
-  var numDeq: Int = 0
-  var numSrc: Int = 0
-  var dataBits: Int = 0
-  var dataIdBits: Int = 0
-  var numFastWakeup: Int = 0
-  var numWakeup: Int = 0
+  var numEntries: Int = 0//
+  var numEnq: Int = 0//ge
+  var numDeq: Int = 0//out
+  var numSrc: Int = 0//yuan caozuoshu
+  var dataBits: Int = 0//64
+  var dataIdBits: Int = 0//
+  var numFastWakeup: Int = 0//
+  var numWakeup: Int = 0//
   var hasFeedback: Boolean = false
   var delayedRf: Boolean = false
-  var fixedLatency: Int = -1
+  var fixedLatency: Int = -1//-1 meiyou, >=1
   var checkWaitBit: Boolean = false
   var optBuf: Boolean = false
   // special cases
@@ -169,8 +169,8 @@ class ReservationStation(implicit p: Parameters) extends LazyModule with HasXSPa
       val stData = ValidIO(new StoreDataBundle)
     })) else None
 
-    val statusArray = Module(new StatusArray(params))
-    val select = Module(new SelectPolicy(params))
+    val statusArray = Module(new StatusArray(params))//
+    val select = Module(new SelectPolicy(params))//
     val dataArray = Module(new DataArray(params))
     val payloadArray = Module(new PayloadArray(new MicroOp, params))
 
@@ -407,4 +407,8 @@ class ReservationStation(implicit p: Parameters) extends LazyModule with HasXSPa
       connectFastWakeup(u, d)
     }
   }
+}
+
+val testResult = Driver(() => new ReservationStation()){
+  c => new
 }
